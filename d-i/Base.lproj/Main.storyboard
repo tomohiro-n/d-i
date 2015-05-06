@@ -680,7 +680,7 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
-                                    <action selector="actionEntered:" target="XfG-lQ-9wD" id="Wgf-L0-V2f"/>
+                                    <action selector="actionEntered:" target="XfG-lQ-9wD" id="AyD-0I-fDV"/>
                                 </connections>
                             </textField>
                         </subviews>
@@ -691,6 +691,9 @@
                             <constraint firstItem="uI1-1X-KcE" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="uhk-59-bgS"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="actionTextField" destination="uI1-1X-KcE" id="AUl-eV-Dtm"/>
+                    </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>

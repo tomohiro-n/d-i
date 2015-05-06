@@ -8,17 +8,26 @@
 
 import Cocoa
 
-class ViewController: NSViewController {
+class ViewController: NSViewController, NSTextFieldDelegate {
 
+	@IBOutlet weak var actionTextField: NSTextField!
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-
 		// Do any additional setup after loading the view.
+		actionTextField.delegate = self
 	}
 
 	override var representedObject: AnyObject? {
 		didSet {
 		// Update the view, if already loaded.
+		}
+	}
+	
+	override func controlTextDidChange(obj: NSNotification) {
+		let textField = obj.object as! NSTextField
+		if (textField == self.actionTextField) {
+			
 		}
 	}
 
