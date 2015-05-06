@@ -28,11 +28,16 @@ class ViewController: NSViewController {
 		let textArr : [String] = split(textEntered) {$0==" "}
 		if (textArr.count != 2) {
 			println("bad text!!")
-			//TODO show overlay text or something to let users enter verb and object
+			// TODO show overlay text or something to let users enter verb and object
 		} else {
 			let verb : String = textArr[0]
 			let object : String = textArr[1]
 			println("Verb: " + verb + ", Object: " + object)
+			// TODO do what user needs
+			if (verb == "l") {
+				let applications : [Application] = textActionService.getApplications(object)
+				NSWorkspace.sharedWorkspace().launchApplication(applications[0].fullPath)
+			}
 		}
 	}
 }
