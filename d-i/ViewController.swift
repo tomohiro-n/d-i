@@ -8,14 +8,21 @@
 
 import Cocoa
 
-class ViewController: NSViewController, NSTextFieldDelegate {
+class ViewController: NSViewController, NSTextFieldDelegate, NSTableViewDelegate, NSTableViewDataSource {
 
 	@IBOutlet weak var actionTextField: NSTextField!
+	@IBOutlet weak var actionCandidatesTableView: NSTableView!
+	
+	var applications : [Application] = []
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		// Do any additional setup after loading the view.
 		actionTextField.delegate = self
+		
+		actionCandidatesTableView.headerView = nil
+		actionCandidatesTableView.setDelegate(self)
+		actionCandidatesTableView.setDataSource(self)
 	}
 
 	override var representedObject: AnyObject? {
@@ -24,10 +31,35 @@ class ViewController: NSViewController, NSTextFieldDelegate {
 		}
 	}
 	
+	func numberOfRowsInTableView(tableView: NSTableView) -> Int {
+		if (tableView == self.actionCandidatesTableView) {
+			return self.applications.count
+		} else {
+			return 0
+		}
+	}
+	
+	func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
+		if (tableView == self.actionCandidatesTableView) {
+			let id : String! = tableColumn?.identifier!
+			let result = tableView.makeViewWithIdentifier(id, owner: self) as! NSTableCellView
+			switch(id) {
+				case "Verb":
+				result.textField?.stringValue = "Launch"
+				case "Object":
+				result.textField?.stringValue = self.applications[row].path
+			default:
+				break
+			}
+			return result
+		}
+		return nil
+	}
+	
 	override func controlTextDidChange(obj: NSNotification) {
 		let textField = obj.object as! NSTextField
 		if (textField == self.actionTextField) {
-			
+			// TODO
 		}
 	}
 
@@ -44,7 +76,10 @@ class ViewController: NSViewController, NSTextFieldDelegate {
 			println("Verb: " + verb + ", Object: " + object)
 			// TODO do what user needs
 			if (verb == "l") {
-				let applications : [Application] = textActionService.getApplications(object)
+				applications = textActionService.getApplications(object)
+				dispatch_async(dispatch_get_main_queue(), {
+					self.actionCandidatesTableView.reloadData()
+				})
 				NSWorkspace.sharedWorkspace().launchApplication(applications[0].fullPath)
 			}
 		}
