@@ -679,6 +679,9 @@
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
+                                <connections>
+                                    <action selector="actionEntered:" target="XfG-lQ-9wD" id="Wgf-L0-V2f"/>
+                                </connections>
                             </textField>
                         </subviews>
                         <constraints>

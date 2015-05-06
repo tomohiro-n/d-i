@@ -23,5 +23,17 @@ class ViewController: NSViewController {
 	}
 
 
+	@IBAction func actionEntered(sender: NSTextField) {
+		let textEntered: String = sender.stringValue
+		let textArr : [String] = split(textEntered) {$0==" "}
+		if (textArr.count != 2) {
+			println("bad text!!")
+			//TODO show overlay text or something to let users enter verb and object
+		} else {
+			let verb : String = textArr[0]
+			let object : String = textArr[1]
+			println("Verb: " + verb + ", Object: " + object)
+		}
+	}
 }
 
